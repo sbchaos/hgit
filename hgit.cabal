@@ -18,6 +18,7 @@ library
   exposed-modules:     Data.Storage.Parser
                      , Data.Storage.ObjectTypes
                      , Data.Parser.Number
+                     , Data.Compress.Compress
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , parsec
