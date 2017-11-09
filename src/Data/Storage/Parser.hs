@@ -28,11 +28,10 @@ sha1 :: Parser String
 sha1 = count 40 anyChar
 
 entry :: Parser TreeEntry
-entry = TreeEntry <$> (filetyp <* ws) <*> (gitType <* ws) <*> (sha1 <* ws) <*> filepath
+entry = TreeEntry <$> (filetyp <* ws) <*> (filepath <* char '\0') <*> (count 20 anyChar <* ws)
   where
     filetyp = count 6 anyChar
     filepath = many1 $ noneOf "\0"
-    gtype = gitType
 
 treeP :: Parser [TreeEntry]
 treeP = many1 entry
@@ -70,4 +69,4 @@ gitObject = do
 
 
 parseGitObject :: String -> Either ParseError Object
-parseGitObject text = parse gitObject "test" text
+parseGitObject = parse gitObject "test"

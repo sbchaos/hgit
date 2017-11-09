@@ -22,9 +22,8 @@ type Blob = String
 
 data TreeEntry = TreeEntry
   { mode :: String
-  , gtype :: ObjectType
-  , hash :: String
   , path :: String
+  , hash :: String
   } deriving (Eq, Show)
 
 data Tree = Tree
