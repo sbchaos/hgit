@@ -33,3 +33,7 @@ spec =
         parse entry "test" "100644 .gitmodules\NUL\230\157\226\155\178\209\214CK\139)\174wZ\216\194\228\140S\145\&" `shouldBe` Right TreeEntry { mode="100644", hash="\230\157\226\155\178\209\214CK\139)\174wZ\216\194\228\140S\145\&", path=".gitmodules"}
       it "parses tree successfully" $
         parseGitObject treeData `shouldBe` Right goTree
+    describe "parses tags" $ do
+      let tagData = "object 90581c7bfbcd279768580eec595d0ab3c094cc02\ntype commit\ntag v1.0.0beta1\ntagger Ethan Schoonover <es@ethanschoonover.com> 1300994142 -0700\n\nInitial public beta release 1.0.0beta1\n"
+      it "parses entry successfully" $
+        parse tag "test" tagData `shouldBe` Right Tag { tagRef = "90581c7bfbcd279768580eec595d0ab3c094cc02", tagType= "commit", tagName= "v1.0.0beta1", tagger = "Ethan Schoonover <es@ethanschoonover.com> 1300994142 -0700", tagLog = "Initial public beta release 1.0.0beta1\n"}

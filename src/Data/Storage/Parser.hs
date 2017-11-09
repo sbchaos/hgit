@@ -49,12 +49,12 @@ commit = Commit <$> tre <*> parents <*> author <*> commiter <*> message
 
 
 tag :: Parser Tag
-tag = Tag <$> obj <*> typ <*> name <*> owner <*> tagmsg
+tag = Tag <$> (obj <* ws) <*> (typ <* ws) <*> (name <* ws) <*> (owner <* ws) <*> tagmsg
   where
     obj    = string "object " *> sha1
-    typ    = string "type "   *> many anyChar
-    name   = string "tag "    *> many anyChar
-    owner  = string "tagger " *> many anyChar
+    typ    = string "type "   *> many (noneOf "\n")
+    name   = string "tag "    *> many (noneOf "\n")
+    owner  = string "tagger " *> many (noneOf "\n")
     tagmsg = many anyChar
 
 
